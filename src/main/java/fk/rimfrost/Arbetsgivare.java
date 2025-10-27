@@ -1,4 +1,4 @@
-package fk.rimfrost;
+package se.fk.github.rimfrost.arbetsgivare;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.Path;
