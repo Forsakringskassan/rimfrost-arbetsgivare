@@ -30,7 +30,7 @@ class ArbetsgivareTest
    @ParameterizedTest
    @ValueSource(strings =
    {
-         "19999", "19002"
+         "19999", "15429"
    })
    void testArbetsgivareFalse(String personnummer)
    {

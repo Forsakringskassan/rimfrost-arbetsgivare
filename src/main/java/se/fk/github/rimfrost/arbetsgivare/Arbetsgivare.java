@@ -29,9 +29,9 @@ public class Arbetsgivare implements ArbetsgivareControllerApi
    {
       log.info("Arbetsgivare received request: personnummer={}", personnummer);
       var response = new GetArbetsgivare200Response();
-      String lastFour = personnummer.substring(personnummer.length() - 4);
-      boolean isInvalid = lastFour.equals("9999") || lastFour.equals("9002");
-      response.setResult(!isInvalid);
+      String lastDigit = personnummer.substring(personnummer.length() - 1);
+      boolean isValid = !lastDigit.equals("9");
+      response.setResult(isValid);
       log.info("Arbetsgivare sending response: {}", response);
       return response;
    }
