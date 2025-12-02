@@ -23,28 +23,19 @@ class ArbetsgivareTest
             .asString();
 
       assertThat(actualResponse).isEqualToIgnoringWhitespace("""
-            {"result":true}
+            {
+  "anstallningar": [
+    {
+      "arbetstid": 100,
+      "organisation": {
+        "namn": "Cool Arbetsgivare AB",
+        "nummer": "123456-7890"
+      },
+      "startdag": "2021-12-02",
+      "slutdag": null
+    }
+  ]
+}
             """);
    }
-
-   @ParameterizedTest
-   @ValueSource(strings =
-   {
-         "19999", "15429"
-   })
-   void testArbetsgivareFalse(String personnummer)
-   {
-      String actualResponse = given()
-            .when().get("/arbetsgivare/" + personnummer)
-            .then()
-            .statusCode(200)
-            .extract()
-            .body()
-            .asString();
-
-      assertThat(actualResponse).isEqualToIgnoringWhitespace("""
-            {"result":false}
-            """);
-   }
-
 }
