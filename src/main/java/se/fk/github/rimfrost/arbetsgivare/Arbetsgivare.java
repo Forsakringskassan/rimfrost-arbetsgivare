@@ -3,7 +3,13 @@ package se.fk.github.rimfrost.arbetsgivare;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.Path;
 import se.fk.rimfrost.api.arbetsgivare.jaxrsspec.controllers.generatedsource.ArbetsgivareControllerApi;
+import se.fk.rimfrost.api.arbetsgivare.jaxrsspec.controllers.generatedsource.model.Anstallning;
 import se.fk.rimfrost.api.arbetsgivare.jaxrsspec.controllers.generatedsource.model.GetArbetsgivare200Response;
+import se.fk.rimfrost.api.arbetsgivare.jaxrsspec.controllers.generatedsource.model.Organisation;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +35,18 @@ public class Arbetsgivare implements ArbetsgivareControllerApi
    {
       log.info("Arbetsgivare received request: personnummer={}", personnummer);
       var response = new GetArbetsgivare200Response();
-      String lastDigit = personnummer.substring(personnummer.length() - 1);
-      boolean isValid = !lastDigit.equals("9");
-      response.setResult(isValid);
+
+      var anstallning = new Anstallning();
+      var org = new Organisation();
+      org.setNamn("Cool Arbetsgivare AB");
+      org.setNummer("123456-7890");
+
+      anstallning.setArbetstid(100);
+      anstallning.setOrganisation(org);
+      anstallning.setStartdag(LocalDate.now().minusYears(4));
+      anstallning.setSlutdag(null);
+
+      response.addAnstallningarItem(anstallning);
       log.info("Arbetsgivare sending response: {}", response);
       return response;
    }
